@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=SDL2_ES2
+Comment=SDL2 ES2 demo
+Exec=sdl2_es2.bin
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=images/tux
+Categories=games;
