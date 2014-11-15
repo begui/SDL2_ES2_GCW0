@@ -8,8 +8,7 @@ endif()
 ##############################################
 # Set project name 
 ##############################################
-set(PROJECTNAME "sdl2_es2")
-project(${PROJECTNAME})
+project(sdl2_es2)
 option(BUILD_GCW0 "Build for the GCW0" OFF)
 ##############################################
 # Set GCW0 toolchain 
@@ -46,19 +45,19 @@ set(SRC
 if(BUILD_GCW0)
 	file(COPY images DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/data)
 	configure_file( opk/default.gcw0.desktop ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
-	file( WRITE  ${CMAKE_CURRENT_BINARY_DIR}/create_opk.sh "/opt/gcw0-toolchain/usr/bin/mksquashfs ./data/* ${PROJECTNAME}.bin default.gcw0.desktop ${PROJECTNAME}.opk -all-root -noappend -no-exports -no-xattrs")
+	file( WRITE  ${CMAKE_CURRENT_BINARY_DIR}/create_opk.sh "/opt/gcw0-toolchain/usr/bin/mksquashfs ./data/* ${PROJECT_NAME}.bin default.gcw0.desktop ${PROJECT_NAME}.opk -all-root -noappend -no-exports -no-xattrs")
 endif(BUILD_GCW0)
 ##############################################
 # Build Binary 
 ##############################################
-add_executable(${PROJECTNAME}.bin ${SRC})
+add_executable(${PROJECT_NAME}.bin ${SRC})
 if(BUILD_GCW0)
-	target_link_libraries(${PROJECTNAME}.bin
+	target_link_libraries(${PROJECT_NAME}.bin
 		${SDL2_LIBRARIES}
 		${GLESv2_LIBRARIES}
 		)
 else()
-	target_link_libraries(${PROJECTNAME}.bin
+	target_link_libraries(${PROJECT_NAME}.bin
 		${SDL2_LIBRARIES}
 		${OpenGL_LIBRARIES}
 		)
