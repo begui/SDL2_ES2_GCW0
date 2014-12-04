@@ -4,6 +4,20 @@
 #include <algorithm>
 #include <vector>
 #include <iostream>
+#include <cstdio>
+
+void printGLVersion()
+{
+	printf("Opengl Vender: %s\n",
+			(const char*) glGetString(GL_VENDOR));
+	printf("Opengl Renderer: %s\n",
+			(const char*) glGetString(GL_RENDERER));
+	printf("Opengl Version: %s\n", 
+			(const char *)glGetString(GL_VERSION));
+	printf("GLSL Version: %s\n",
+			(const char *)glGetString( GL_SHADING_LANGUAGE_VERSION));
+}
+
 
 static GLuint loadProgram(GLuint vertex, GLuint fragment, std::vector<std::string> attributes)
 {

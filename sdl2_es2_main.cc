@@ -123,6 +123,7 @@ int main(int argc, char *argv[])
 		std::cerr << "Could not create window " <<  SDL_GetError() << std::endl;
 		return EXIT_FAILURE;
 	}
+	printGLVersion();
 
 	RotateTriangle tri;
 	bool running=true;
