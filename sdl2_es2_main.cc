@@ -17,29 +17,30 @@ SDL_Window *init_window(Uint32 subsystems, Uint32 windowFlags)
 	SDL_Window *window = nullptr;
 	if ( SDL_Init(subsystems) >=0 )
 	{
+		//
+		// Set core profile
+		//
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+		// Enables double buffering
+		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		// 24 bit depth buffer  
+		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
 		window = SDL_CreateWindow(	"An SDL2 window", 
 				SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 				WIDTH, HEIGHT, 
 				windowFlags );
 		if(window) 
 		{
-			//
-			// Set core profile
-			//
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-			// Enables double buffering
-			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-			// 24 bit depth buffer  
-			SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 			// Create OpenGL Context
 			gcontext = SDL_GL_CreateContext(window);
 			if(nullptr == gcontext)
 			{
 				std::cerr << "Failed  to create gl context.\nError: " <<  SDL_GetError() << std::endl;
-				 SDL_DestroyWindow(window);
-				 window = nullptr;
+				SDL_DestroyWindow(window);
+				window = nullptr;
 			}
 			// enable vsync
 			SDL_GL_SetSwapInterval(1);
